@@ -676,6 +676,7 @@
       }
     }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 
 <body>
@@ -865,11 +866,16 @@
   <script>
     // ── CONFIG ──────────────────────────────────────────────────────────────
     // Replace with your deployed backend URL when live on Railway/Render
-    const API_BASE = 'http://localhost:3000';
+
 
     // Replace with your actual WhatsApp channel link
     // Format: https://whatsapp.com/channel/XXXXXXXXXXXXXXXXXXXXXXXXXX
     const WA_CHANNEL = 'https://whatsapp.com/channel/0029Vb7c8SrLNSZyrvYXE60M';
+
+    // ── DATABASE ────────────────────────────────────────────────────────────────
+    const supabaseUrl = 'https://nplhoxqjnbkpxvjppwlh.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5wbGhveHFqbmJrcHZqcHB3bGgiLCJyb2xlIjoiYW5vbiIsImlhdCI6MTc0NDQxNTM2NCwiZXhwIjoyMDU5OTkxMzY0fQ.8434121341234123412341234123412341234123412341234123412341234123';
+    const API_BASE = supabase.createClient(supabaseUrl, supabaseKey);
 
     // ── STATE ────────────────────────────────────────────────────────────────
     let currentType = 'plug';
