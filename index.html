@@ -957,7 +957,7 @@
 
         // Success - fetch updated count
         const { count, error: countError } = await supabaseClient
-          .from('Waitlist')
+          .from('Plugr Waitlist')
           .select('*', { count: 'exact', head: true });
 
         const totalSignups = count || 33;
