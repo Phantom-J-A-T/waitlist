@@ -873,8 +873,8 @@
     const WA_CHANNEL = 'https://whatsapp.com/channel/0029Vb7c8SrLNSZyrvYXE60M';
 
     // ── DATABASE ────────────────────────────────────────────────────────────────
-    const supabaseUrl = 'https://nplhoxqjnbkpxvjppwlh.supabase.co';
-    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5wbGhveHFqbmJrcHZqcHB3bGgiLCJyb2xlIjoiYW5vbiIsImlhdCI6MTc0NDQxNTM2NCwiZXhwIjoyMDU5OTkxMzY0fQ.8434121341234123412341234123412341234123412341234123412341234123';
+    const supabaseUrl = 'https://rzxajmbgwwcwmxltcgeb.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ6eGFqbWJnd3djbXd4bHRjZ2ViIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU3NTk5NDAsImV4cCI6MjA5MTMzNTk0MH0.l7iJ_585GkaJc7auSlUxzcG2hV85kiG0mmNvQsfnnok';
     const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
 
     // ── STATE ────────────────────────────────────────────────────────────────
@@ -934,12 +934,12 @@
         const { data, error } = await supabaseClient
           .from('Waitlist')
           .insert([{
-            type: currentType,
-            name,
-            phone,
-            email,
-            location,
-            trade: currentType === 'plug' ? trade : null,
+            "user_type": currentType,         // Matches your type logic
+            "Full Name": name,               // Matches your DB screenshot
+            "Phone Number": phone,           // Matches your DB screenshot
+            "Email": email,                  // Matches your DB screenshot
+            "Location": location,            // Matches your DB screenshot
+            "Skill": currentType === 'plug' ? trade : null, // Matches your DB screenshot
           }]);
 
         if (error) {
