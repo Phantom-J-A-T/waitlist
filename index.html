@@ -73,9 +73,8 @@
     }
 
     .logo-dot {
-      width: 7px;
-      height: 7px;
-      background: var(--gold);
+      width: 45px;
+      height: 45px;
       border-radius: 50%;
     }
 
@@ -689,7 +688,8 @@
     <!-- NAV -->
     <nav>
       <div class="logo">
-        <div class="logo-dot"></div>PLUGR
+        <img src="Plugr.jpeg" class="logo-dot" alt="Plugr Logo">
+        PLUGR
       </div>
       <div class="nav-tag">Early Access</div>
     </nav>
@@ -738,7 +738,7 @@
           <div class="av av4">F</div>
         </div>
         <div class="proof-text">
-          <strong>32+ people</strong> already on the waitlist.<br />
+          <strong id="counter">0</strong>+ people already on the waitlist.<br />
           Artisans &amp; clients both welcome.
         </div>
       </div>
@@ -752,8 +752,8 @@
         <div id="form-content">
           <div class="form-eyebrow">Join the waitlist</div>
           <div class="form-title">Get your edge first.</div>
-          <div class="form-sub">Be among the first verified on Plugr when we launch. Connecting verified plugs with
-            clients and plugs with sure clients</div>
+          <div class="form-sub">Be among the first verified on Plugr when we launch.
+            Connecting plugs to clients and clients to plugs</div>
 
           <div class="toggle-wrap">
             <button class="toggle-btn active" onclick="setType('plug', this)">I&rsquo;m a Plug</button>
@@ -824,7 +824,7 @@
           <div class="success-sub">We&rsquo;ll reach out before launch day. Join our WhatsApp channel to watch us build
             in real time.</div>
           <div>
-            <div class="success-count" id="counter">33</div>
+            <div class="success-count" id="counter">0</div>
             <div class="success-count-label">people ahead of the curve</div>
           </div>
           <a href="#" class="btn-wa" style="margin-top:8px;" onclick="joinChannel(event)">
@@ -955,12 +955,13 @@
           return;
         }
 
+
         // Success - fetch updated count
         const { count, error: countError } = await supabaseClient
           .from('Plugr Waitlist')
           .select('*', { count: 'exact', head: true });
 
-        const totalSignups = count || 33;
+        const totalSignups = count || 1;
         showSuccess(totalSignups);
 
       } catch (err) {
@@ -975,19 +976,26 @@
 
     // ── SUCCESS STATE ────────────────────────────────────────────────────────
     function showSuccess(totalSignups) {
+      // Hide the form and show the success state
       document.getElementById('form-content').style.display = 'none';
       const success = document.getElementById('success-state');
       success.style.display = 'flex';
 
-      // Animate counter from totalSignups - 1 to totalSignups
       const el = document.getElementById('counter');
-      let count = totalSignups - 1;
-      el.textContent = count;
+
+      // Start the animation from 0
+      let currentDisplay = 0;
+      el.textContent = currentDisplay;
+
+      // Ticking animation to reach the total
       const iv = setInterval(() => {
-        if (count >= totalSignups) { clearInterval(iv); return; }
-        count++;
-        el.textContent = count;
-      }, 120);
+        if (currentDisplay >= totalSignups) {
+          clearInterval(iv);
+          return;
+        }
+        currentDisplay++;
+        el.textContent = currentDisplay;
+      }, 100); // 100ms per tick
     }
 
     // ── ERROR DISPLAY ────────────────────────────────────────────────────────
